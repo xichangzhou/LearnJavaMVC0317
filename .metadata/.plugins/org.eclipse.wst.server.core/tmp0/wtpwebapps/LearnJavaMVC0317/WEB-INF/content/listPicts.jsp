@@ -29,5 +29,7 @@ img {
 	<s:select id="select" list="picts" listValue="picName"
 		listKey="fileName" label="选择图片" size="5"/>
 	<img id="show" src="">
+	
+	
 </body>
 </html>

@@ -30,6 +30,6 @@ img {
 		listKey="fileName" label="选择图片" size="5"/>
 	<img id="show" src="">
 	
-	
+	struts.message.error.content.type.not.allowed="您上传的文件类型只能是图片文件!"
 </body>
 </html>
