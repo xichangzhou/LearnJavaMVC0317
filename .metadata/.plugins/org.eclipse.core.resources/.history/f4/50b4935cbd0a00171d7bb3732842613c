@@ -1,0 +1,15 @@
+package com.cn.xi.action;
+
+import com.cn.xi.service.UserService;
+import com.opensymphony.xwork2.Action;
+
+public class ViewUserAction implements Action {
+
+	@Override
+	public String execute() throws Exception {
+		UserService us = new UserService();
+		us.getAllUsers();
+		return SUCCESS;
+	}
+
+}

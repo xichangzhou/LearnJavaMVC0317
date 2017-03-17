@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- 所有的配置都要放在package元素中，而且包必须继承struts-default -->
+	<package name="default" namespace="/" extends="struts-default">
+
+
+		<action name="loginPro" class="com.cn.xi.action.LoginProAction">
+			<result name="success">/WEB-INF/content/welcome.jsp</result>
+			<result name="error">/WEB-INF/content/error.jsp</result>
+		</action>
+
+
+
+
+
+		<!-- 他是一个通用的action,此处的*表示可以处理任意的请求 -->
+		<action name="*">
+			<!-- 此处的{1}代表前面第一个*所匹配的字符串 -->
+			<result type="redirectAction">/WEB-INF/content/{1}.jsp</result>
+		</action>
+
+	</package>
+
+	<!-- <include file="example.xml" /> -->
+
+
+
+</struts>
