@@ -5,16 +5,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import com.cn.xi.dao.CustomerDao;
+import com.cn.xi.dao.CustomerDaoImpl;
 import com.cn.xi.domain.User;
 
 public class UserService {
-	
+	static CustomerDao dao = new CustomerDaoImpl();
 	//模拟数据库
 	static List<User> userDB;
 
 	static  {
 		userDB = new ArrayList<>();
-		userDB.add(new User(1,"sun","123",56.3,new Date()));
+		userDB =  dao.query();
+	}
+	
+	public List<User> getAllUsers() {
+		return userDB;
 	}
 
 	public Integer validateLogin(User user) {
@@ -27,12 +33,6 @@ public class UserService {
 	}
 
 	public void addUser(User user) {
-		user.setId(new Random().nextInt(9999999));
-		userDB.add(user);
-	}
-
-	public List<User> getAllUsers() {
-		return userDB;
-		
+		dao.add(user);
 	}
 }

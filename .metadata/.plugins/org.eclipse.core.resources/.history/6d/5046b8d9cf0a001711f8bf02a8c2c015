@@ -1,9 +1,0 @@
-package com.cn.xi.service;
-
-public class PicService {
-
-	public void addPic(String picName, String newFileName) {
-		
-	}
-
-}

@@ -14,7 +14,7 @@
 
 
 		<action name="loginPro" class="com.cn.xi.action.LoginProAction">
-			<result name="success">/WEB-INF/content/welcome.jsp</result>
+			<result name="success">/WEB-INF/content/downForm.jsp</result>
 			<result name="error">/WEB-INF/content/error.jsp</result>
 		</action>
 
@@ -32,7 +32,7 @@
 			<!-- 文件上传过滤器 -->
 			<interceptor-ref name="fileUpload">
 				<param name="allowedTypes">image/png,image/jpeg,image/gif</param>
-				<param name="maximumSize">10000</param>
+				<param name="maximumSize">1000000</param>
 			</interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result type="chain">listPics</result>
@@ -45,6 +45,8 @@
 		</action>
 
 		<action name="down" class="com.cn.xi.action.DownAction">
+
+			<result name="error">/WEB-INF/content/loginForm.jsp</result>
 			<result type="stream">
 				<!-- ${resType}直接读取action中的属性 -->
 				<param name="contentType">${resType}</param>

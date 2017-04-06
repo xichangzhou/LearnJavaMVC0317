@@ -1,0 +1,109 @@
+package com.xi.dao.impl;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mysql.jdbc.PreparedStatement;
+import com.xi.dao.CustomerDao;
+import com.xi.database.DBUtil;
+import com.xi.entity.Customer;
+
+public class CustomerDaoImpl implements CustomerDao {
+
+	@Override
+	public void add(Customer c) {
+		String sql = "insert into CustomerTbl(name,email) values(?,?)";
+		Connection connection = DBUtil.open();
+		try {
+			PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preparedStatement.setString(1, c.getName());
+			preparedStatement.setString(2, c.getEmail());
+			
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(connection);
+		}
+	}
+
+	@Override
+	public void update(Customer c) {
+		String sql = "update CustomerTbl set name=?,email=? where id = ?";
+		Connection connection = DBUtil.open();
+		try {
+			PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preparedStatement.setString(1, c.getName());
+			preparedStatement.setString(2, c.getEmail());
+			preparedStatement.setInt(3, c.getId());
+			
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(connection);
+		}
+	}
+
+	@Override
+	public void delete(int id) {
+		String sql = "delete from CustomerTbl where id = ?";
+		Connection connection = DBUtil.open();
+		try {
+			PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(connection);
+		}
+	}
+
+	@Override
+	public Customer getCustomerById(int id) {
+		String sql = "select * from CustomerTbl where id = ?";
+		Connection connection = DBUtil.open();
+		try {
+			PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()){
+				Customer c = new Customer(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3));
+				return c;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(connection);
+		}
+		return null;
+	}
+
+	@Override
+	public List<Customer> query() {
+		String sql = "select * from CustomerTbl";
+		Connection connection = DBUtil.open();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+			List<Customer> list = new ArrayList<Customer>();
+			while(resultSet.next()){
+				Customer c = new Customer(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3));
+				list.add(c);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(connection);
+		}
+		return null;
+	}
+
+}

@@ -11,7 +11,7 @@
 		用户名:<input type="text" name="user.name"><br>
 		密码:<input type="text" name="user.pass"><br>
 		体重:<input type="text" name="user.weight"><br>
-		生日:<input type="text" name="user.birth"><br>
+		生日:<input type="date" name="user.birth"><br>
 		<input type="submit" value="注册">
 </form>
 </body>

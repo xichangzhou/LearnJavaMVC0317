@@ -1,0 +1,36 @@
+package com.cn.xi.db;
+
+import java.util.List;
+
+import com.cn.xi.dao.Customer;
+import com.cn.xi.dao.CustomerDao;
+import com.cn.xi.dao.CustomerDaoImpl;
+
+
+
+/*Dao全称是：Data Access Object,数据访问对象，使用DAO设计模式，来封装数据库持久层的所有操作*/
+public class DBDAO {
+
+	public static void main(String[] args) {
+
+		CustomerDao dao = new CustomerDaoImpl();
+		// dao.add(new Customer("wo", "wo@qq.com"));
+		// dao.update(new Customer(1, "woo", "woo@qq.com"));
+
+		// dao.delete(1);
+
+		List<Customer> list = dao.query();
+		for (Customer c : list) {
+			System.out.println(c);
+		}
+
+		// Customer c = dao.getCustomerById(9);
+		// System.out.println(c.getName());
+	}
+	
+	public void createTable() {
+		
+		
+	}
+
+}

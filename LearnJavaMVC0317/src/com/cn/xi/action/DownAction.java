@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 //此处是一个通过的下载文件的action
@@ -47,7 +48,14 @@ public class DownAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		return SUCCESS;
+		Integer userId = (Integer)ActionContext.getContext().getSession().get("userId");
+		if(userId < 0 || userId == null) {
+			System.out.println("-----------------++++++++++++++++");
+			return ERROR;
+		} else {
+			return SUCCESS;
+		}
+		
 	}
 
 }
